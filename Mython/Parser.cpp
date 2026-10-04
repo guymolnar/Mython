@@ -50,3 +50,19 @@ Type* Parser::getType(std::string str)
 		return nullptr;
 	}
 }
+
+bool Parser::isLegalVarName(const std::string& str)
+{
+	if (str.empty() || Helper::isDigit(str.front()))
+	{
+		return false;
+	}
+	for (const auto& ch : str)
+	{
+		if (!Helper::isDigit(ch) && !Helper::isUnderscore(ch) && !Helper::isLetter(ch))
+		{
+			return false;
+		}
+	}
+
+}

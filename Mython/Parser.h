@@ -21,6 +21,7 @@ class Parser
 public:
 	static Type* parseString(std::string str);
 	static Type* getType(std::string str);
+	static bool isLegalVarName(const std::string& str);
 private:
 	static std::unordered_map<std::string, Type*> _variables;
 };
