@@ -18,7 +18,16 @@ Type* Parser::parseString(std::string str)
 	Type* type = getType(str);
 	if (type == nullptr)
 	{
-		throw SyntaxException();
+		if (makeAssignment(str))
+		{
+			Void* tempVoid = new Void();
+			tempVoid->setIsTemp(true);
+			return tempVoid;
+		}
+		else
+		{
+			throw SyntaxException();
+		}
 	}
 	return type;
 }
@@ -65,4 +74,31 @@ bool Parser::isLegalVarName(const std::string& str)
 		}
 	}
 
+}
+
+bool Parser::makeAssignment(std::string str)
+{
+	Helper::trim(str);
+	if (str.find(" = ") == std::string::npos || (!str.empty() && str.back() == '='))
+	{
+		return false;
+	}
+	
+	std::string variableName = str.substr(0, str.find(" = "));
+	std::string value = str.substr(str.find(" = ") + 3);
+
+	if (!isLegalVarName(variableName))
+	{
+		throw SyntaxException();
+	}
+
+	Type* type = getType(value);
+	if (type == nullptr)
+	{
+		throw SyntaxException();
+	}
+	type->setIsTemp(false);
+
+	_variables[variableName] = type;
+	return true;
 }
