@@ -22,7 +22,15 @@ int main(int argc,char **argv)
 		// parsing command
 		try
 		{
-			Parser::parseString(input_string);
+			Type* type = Parser::parseString(input_string);
+			if (type->isPrintable())
+			{
+				std::cout << type->toString() << std::endl;
+			}
+			if (type->isTemp())
+			{
+				delete type;
+			}
 		}
 		catch (const std::exception& e)
 		{

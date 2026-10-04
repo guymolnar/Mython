@@ -127,12 +127,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Boolean.cpp" />
     <ClCompile Include="Helper.cpp" />
     <ClCompile Include="IndentationException.cpp" />
+    <ClCompile Include="Integer.cpp" />
     <ClCompile Include="Interpreter.cpp" />
     <ClCompile Include="Parser.cpp" />
+    <ClCompile Include="String.cpp" />
     <ClCompile Include="SyntaxException.cpp" />
     <ClCompile Include="Type.cpp" />
+    <ClCompile Include="Void.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Boolean.h" />

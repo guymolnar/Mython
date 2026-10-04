@@ -1,6 +1,6 @@
 #include "Type.h"
 
-bool Type::getIsTemp() const
+bool Type::isTemp() const
 {
 	return this->_isTemp;
 }

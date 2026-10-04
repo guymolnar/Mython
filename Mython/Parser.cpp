@@ -13,8 +13,14 @@ Type* Parser::parseString(std::string str)
 		throw IndentationException();
 	}
 
-	std::cout << str << std::endl;
 
+	Helper::trim(str);
+	Type* type = getType(str);
+	if (type == nullptr)
+	{
+		throw SyntaxException();
+	}
+	return type;
 }
 
 Type* Parser::getType(std::string str)
@@ -34,8 +40,13 @@ Type* Parser::getType(std::string str)
 	}
 	else if (Helper::isString(str))
 	{
+		str = str.substr(1, str.length() - 2);
 		String* tempString = new String(str);
 		tempString->setIsTemp(true);
 		return tempString;
+	}
+	else
+	{
+		return nullptr;
 	}
 }
