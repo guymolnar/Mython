@@ -17,4 +17,25 @@ Type* Parser::parseString(std::string str)
 
 }
 
-
+Type* Parser::getType(std::string str)
+{
+	Helper::trim(str);
+	if (Helper::isInteger(str))
+	{
+		Integer* tempInt = new Integer(std::stoi(str));
+		tempInt->setIsTemp(true);
+		return tempInt;
+	}
+	else if (Helper::isBoolean(str))
+	{
+		Boolean* tempBool = new Boolean(str == "True" ? true : false);
+		tempBool->setIsTemp(true);
+		return tempBool;
+	}
+	else if (Helper::isString(str))
+	{
+		String* tempString = new String(str);
+		tempString->setIsTemp(true);
+		return tempString;
+	}
+}

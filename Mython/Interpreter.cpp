@@ -30,7 +30,6 @@ int main(int argc,char **argv)
 		}
 
 
-
 		// get new command from user
 		std::cout << ">>> ";
 		std::getline(std::cin, input_string);
