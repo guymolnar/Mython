@@ -3,13 +3,18 @@
 
 
 Type* Parser::parseString(std::string str)
-{
-	if (str.length() > 0)
+{	
+	if (str.empty())
 	{
-		std::cout << str << std::endl;
+		return nullptr;
+	}
+	if (str.front() == ' ' || str.front() == '\t')
+	{
+		throw IndentationException();
 	}
 
-	return nullptr;
+	std::cout << str << std::endl;
+
 }
 
 

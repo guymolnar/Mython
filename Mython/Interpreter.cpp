@@ -4,7 +4,7 @@
 #include <iostream>
 
 #define WELCOME "Welcome to Magshimim Python Interperter version 1.0 by "
-#define YOUR_NAME "[YOUR NAME]"
+#define YOUR_NAME "Guy Molnar"
 
 
 int main(int argc,char **argv)
@@ -20,7 +20,15 @@ int main(int argc,char **argv)
 	while (input_string != "quit()")
 	{
 		// parsing command
-		Parser::parseString(input_string);
+		try
+		{
+			Parser::parseString(input_string);
+		}
+		catch (const std::exception& e)
+		{
+			std::cout << e.what() << std::endl;
+		}
+
 
 
 		// get new command from user
