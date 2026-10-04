@@ -42,6 +42,6 @@ int main(int argc,char **argv)
 		std::cout << ">>> ";
 		std::getline(std::cin, input_string);
 	}
-
+	Parser::freeAllMemory();
 	return 0;
 }

@@ -1,6 +1,6 @@
 #include "Parser.h"
 #include <iostream>
-
+std::unordered_map<std::string, Type*> Parser::_variables;
 
 Type* Parser::parseString(std::string str)
 {	
@@ -15,7 +15,12 @@ Type* Parser::parseString(std::string str)
 
 
 	Helper::trim(str);
-	Type* type = getType(str);
+	Type* type = getVariableValue(str);
+	if (type != nullptr)
+	{
+		return type;
+	}
+	type = getType(str);
 	if (type == nullptr)
 	{
 		if (makeAssignment(str))
@@ -73,7 +78,7 @@ bool Parser::isLegalVarName(const std::string& str)
 			return false;
 		}
 	}
-
+	return true;
 }
 
 bool Parser::makeAssignment(std::string str)
@@ -101,4 +106,25 @@ bool Parser::makeAssignment(std::string str)
 
 	_variables[variableName] = type;
 	return true;
+}
+
+Type* Parser::getVariableValue(std::string str)
+{
+	Helper::trim(str);
+	if (_variables.count(str) == 0)
+	{
+		return nullptr;
+	}
+
+	return _variables[str];
+
+}
+
+void Parser::freeAllMemory()
+{
+	for (auto& pair : _variables)
+	{
+		delete pair.second;
+	}
+	_variables.clear();
 }
